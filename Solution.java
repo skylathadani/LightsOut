@@ -19,9 +19,9 @@ public class Solution {
 		x = new Boolean[width][height];
 
 //needed these variables for setNext, couldnt leave them as global variables because every instance of "solution" would have changed their value
-		row = 1;
-		col = 1;
-		count = 0;
+		row = 0;
+		col = -1;
+		
 	}
 
 	public Solution(Solution other) {
@@ -33,14 +33,22 @@ public class Solution {
 
 		//ok im pretty sure thats how the method should be written but i could be wrong
 		//https://piazza.com/class/jpvulq1lvgm6fs?cid=517  -> thing on piazza that had more instructions
+		//also the first call starts at position (0,0) cuz that makes sense since the array starts at (0,0) idk what the instructions even want
+		col++;
+       
+       if(col >= x[0].length){
+         row++;
+         col = 0;
+         }
+        
+        if(row < x.length && col < x[0].length){
+            x[row][col] = nextValue;
+        }else{
+          System.out.println("Too many calls to setNext");
+        }
 
-		count++;
+	
 
-		if(count < x.length){
-			x[count][col] = nextValue;
-		}else{
-			System.out.println("Too many calls to setNext have been used. Board is not big enough");
-		}
 
 
 
@@ -58,5 +66,16 @@ public class Solution {
 		}
 
 		return true;
+	}
+
+	public static void main(String[] args) {
+		Solution solution;
+		solution = new Solution(3,2);
+		solution.setNext(true);
+		solution.setNext(true);
+		solution.setNext(false);
+		solution.setNext(true);
+		solution.setNext(true);
+		solution.setNext(false);
 	}
 }
