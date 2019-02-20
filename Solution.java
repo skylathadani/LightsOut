@@ -85,6 +85,76 @@ public class Solution {
 
 	public boolean isSuccessful() {
 		if(isReady()) {
+			Solution g = new Solution(this.x.length, this.x[0].length);
+			for(int i=0; i < x.length; i++) {
+				for(int j=0; j< x[0].length; j++) {
+					g.x[i][j] = false;
+				}
+			}
+			for(int i=0; i < x.length; i++) {
+				for(int j=0; j < x[0].length; j++) {
+					if(this.x[i][j] == true) {
+						if(i == 0 && j == 0) {
+							g.x[i][j] = !(g.x[i][j]);
+							g.x[i+1][j] = !(g.x[i+1][j]);
+							g.x[i][j+1] = !(g.x[i][j+1]);
+						}
+						else if(i == 0 && j == x[0].length-1) {
+							g.x[i][j] = !(g.x[i][j]);
+							g.x[i+1][j] = !(g.x[i+1][j]);
+							g.x[i][j-1] = !(g.x[i][j-1]);
+						}
+						else if(i == this.x.length-1 && j == 0) {
+							g.x[i][j] = !(g.x[i][j]);
+							g.x[i-1][j] = !(g.x[i-1][j]);
+							g.x[i][j+1] = !(g.x[i][j+1]);
+						}
+						else if(i == this.x.length-1 && j == this.x[0].length-1) {
+							g.x[i][j] = !(g.x[i][j]);
+							g.x[i-1][j] = !(g.x[i-1][j]);
+							g.x[i][j-1] = !(g.x[i][j-1]);
+						}
+						else if(j == 0) {
+							g.x[i][j] = !(g.x[i][j]);
+							g.x[i+1][j] = !(g.x[i+1][j]);
+							g.x[i][j+1] = !(g.x[i][j+1]);
+							g.x[i-1][j] = !(g.x[i-1][j]);
+						}
+						else if(j == this.x[0].length -1) {
+							g.x[i][j] = !(g.x[i][j]);
+							g.x[i+1][j] = !(g.x[i+1][j]);
+							g.x[i][j-1] = !(g.x[i][j-1]);
+							g.x[i-1][j] = !(g.x[i-1][j]);
+						}
+						else if(i == 0) {
+							g.x[i][j] = !(g.x[i][j]);
+							g.x[i+1][j] = !(g.x[i+1][j]);
+							g.x[i][j+1] = !(g.x[i][j+1]);
+							g.x[i][j-1] = !(g.x[i][j-1]);
+						}
+						else if(i == this.x.length -1) {
+							g.x[i][j] = !(g.x[i][j]);
+							g.x[i-1][j] = !(g.x[i-1][j]);
+							g.x[i][j+1] = !(g.x[i][j+1]);
+							g.x[i-1][j] = !(g.x[i-1][j]);
+						}
+						else {
+							g.x[i][j] = !(g.x[i][j]);
+							g.x[i+1][j] = !(g.x[i+1][j]);
+							g.x[i][j+1] = !(g.x[i][j+1]);
+							g.x[i-1][j] = !(g.x[i-1][j]);
+							g.x[i][j-1] = !(g.x[i][j-1]);
+						}
+					}
+				}
+			}
+			for(int i = 0; i < this.x.length; i++) {
+				for(int j=0; j < this.x[0].length; j++) {
+					if(g.x[i][j] == false) {
+						return false;
+					}
+				}
+			}
 			return true;
 		}
 		return false;
@@ -141,7 +211,6 @@ public class Solution {
   		return aString;
 	}
 
-
 	public static void main(String[] args) {
 		Solution solution;
 		solution = new Solution(3,2);
@@ -155,5 +224,7 @@ public class Solution {
 		System.out.println("The solution is:");
 		System.out.println(solution);
 		System.out.println("Solution is ready: " + solution.isReady());
+		System.out.println("Solution is successful: "+solution.isSuccessful());
+
 	}
 }
