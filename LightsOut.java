@@ -1,15 +1,16 @@
+import java.util.*;
 public class LightsOut{
 	public ArrayList<Solution> solve(int width, int height){
 		final long startTime = System.nanoTime();
-		partialSolutions = new ArrayListSolutionQueue();
+		ArrayListSolutionQueue partialSolutions = new ArrayListSolutionQueue();
 		Solution x = new Solution(width,height);
 		partialSolutions.enqueue(x);
-		ArrayList <Solutions> solutions = new ArrayList <Solutions> ();
+		ArrayList <Solution> solutions = new ArrayList <Solution> ();
 
 		while(partialSolutions.isEmpty()==false){
 			Solution current = partialSolutions.dequeue();
 
-			if(current.isReady() && current.isSucessful()){
+			if(current.isReady() && current.isSuccessful()){
 				solutions.add(current);
 				final long duration = System.nanoTime() - startTime;
 
@@ -22,7 +23,7 @@ public class LightsOut{
 				temp.setNext(false);
 
 				partialSolutions.enqueue(current);
-				partialSolution.enqueue(temp);
+				partialSolutions.enqueue(temp);
 
 			}
 		}
@@ -32,7 +33,11 @@ public class LightsOut{
 
 	public static void main(String[] args) {
 
-		solver = new solve(3,3);
+		ArrayList<Solution> solver = new ArrayList<Solution>();
+
+		solver = solve(3,3);
+
+
 
 
 
@@ -40,7 +45,7 @@ public class LightsOut{
 
 		System.out.println("The Solutions are:");
 
-		for(int i = 0, i < solver.size(); i++){
+		for(int i = 0; i < solver.size(); i++){
 			System.out.println(solver.get(i));
 		}
 	}

@@ -1,7 +1,7 @@
 
 import java.util.*;
 
-public class ArrayListSolutionQueue<Solution> implements SolutionQueue <Solution>{
+public class ArrayListSolutionQueue implements SolutionQueue{
 
 	private ArrayList <Solution> queue;
 	
