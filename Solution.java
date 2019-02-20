@@ -17,7 +17,7 @@ public class Solution {
 	private int row;
 	private int col;
 	public Solution(int width, int height) {
-		x = new Boolean[width][height];
+		x = new Boolean [height][width];
 		this.count = width * height;
 		//needed these variables for setNext, couldnt leave them as global variables because every instance of "solution" would have changed their value
 		this.row = 0;
@@ -26,10 +26,12 @@ public class Solution {
 	}
 
 	public Solution(Solution other) {
-		Solution n = new Solution(other.x.length, other.x[0].length);
+		x = new Boolean [other.x.length][other.x[0].length];
+		this.row = 0;
+		this.col = -1;
 		for(int i = 0; i < other.x.length; i++){
 			for(int j = 0; j < other.x[0].length; j++){
-				n.x[i][j] = other.x[i][j];
+				this.x[i][j] = other.x[i][j];
 			}
 		}
 
@@ -63,7 +65,8 @@ public class Solution {
          	this.row++;
          	this.col = 0;
        } 
-       else if(this.row < this.x.length && this.col < this.x[0].length){
+       
+       if(this.row < this.x.length && this.col < this.x[0].length){
            x[this.row][this.col] = nextValue;
            this.cCompare++;
        }
