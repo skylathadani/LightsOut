@@ -16,12 +16,14 @@ public class Solution {
 	private int cCompare;
 	private int row;
 	private int col;
+
 	public Solution(int width, int height) {
 		x = new Boolean [height][width];
 		this.count = width * height;
 		//needed these variables for setNext, couldnt leave them as global variables because every instance of "solution" would have changed their value
 		this.row = 0;
 		this.col = -1;
+		this.cCompare = 0;
 		
 	}
 
@@ -29,6 +31,7 @@ public class Solution {
 		x = new Boolean [other.x.length][other.x[0].length];
 		this.row = 0;
 		this.col = -1;
+		this.cCompare = 0;
 		for(int i = 0; i < other.x.length; i++){
 			for(int j = 0; j < other.x[0].length; j++){
 				this.x[i][j] = other.x[i][j];
@@ -72,24 +75,36 @@ public class Solution {
        }
        else{
          System.out.println("Too many calls to setNext");
+         this.cCompare = this.count;
        }
 	
 
 	}	
 
 	public boolean isReady() {
-		if(this.cCompare == this.count) {
+		/*if(this.cCompare >= this.count) {
 			return true;
+		}*/
+
+		for(int i = 0; i < this.x.length; i++){
+			for(int j = 0; j < this.x[0].length;j++){
+				if(this.x[i][j] == null){
+					return false;
+				}
+			}
 		}
 		return false;
 	}
 
 	public boolean isSuccessful() {
+		if(this.isReady() == false){
+			return false;
+		}
 		if(isReady()) {
 			Solution g = new Solution(this.x.length, this.x[0].length);
-			for(int i=0; i < x.length; i++) {
+			for(int k=0; k < x.length; k++) {
 				for(int j=0; j< x[0].length; j++) {
-					g.x[i][j] = false;
+					g.x[k][j] = false;
 				}
 			}
 			for(int i=0; i < x.length; i++) {

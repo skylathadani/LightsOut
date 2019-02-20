@@ -18,14 +18,14 @@ public class ArrayListSolutionQueue implements SolutionQueue{
 	}
 
 	public void enqueue(Solution value){
-		queue.add(value);
+	this.queue.add(value);
 	}
 
 	public Solution dequeue(){
 
-		Solution s = queue.get(0);
+		Solution s = this.queue.get(0);
 
-		queue.remove(0);
+		this.queue.remove(s);
 
 		return s;
 

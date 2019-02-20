@@ -7,14 +7,19 @@ public class LightsOut{
 		partialSolutions.enqueue(x);
 		ArrayList <Solution> solutions = new ArrayList <Solution> ();
 
-		while(partialSolutions.isEmpty()==false){
+		while(!(partialSolutions.isEmpty())){
 			Solution current = partialSolutions.dequeue();
+			System.out.println(current);
 
-			if(current.isReady() && current.isSuccessful()){
-				solutions.add(current);
+			if(current.isReady()){
+				if(current.isSuccessful()){
+					solutions.add(current);
 				final long duration = System.nanoTime() - startTime;
 
 				System.out.println("A solution has been found in " + duration);
+
+				}
+				
 			}else if (current.isReady() == false){
 
 				Solution temp = new Solution(current);
@@ -35,7 +40,7 @@ public class LightsOut{
 
 		ArrayList<Solution> solver = new ArrayList<Solution>();
 
-		solver = solve(3,3);
+		solver = solve(2,2);
 
 
 
