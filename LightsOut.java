@@ -1,6 +1,6 @@
 import java.util.*;
 public class LightsOut{
-	public ArrayList<Solution> solve(int width, int height){
+	public static ArrayList<Solution> solve(int width, int height){
 		final long startTime = System.nanoTime();
 		ArrayListSolutionQueue partialSolutions = new ArrayListSolutionQueue();
 		Solution x = new Solution(width,height);
