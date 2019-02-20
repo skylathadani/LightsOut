@@ -12,22 +12,23 @@
 
 public class Solution {
 	Boolean[][] x;
-	//int row;
-	//int col;
+	private int count;
+	private int cCompare;
+	private int row;
+	private int col;
 	public Solution(int width, int height) {
 		x = new Boolean[width][height];
-
+		this.count = width * height;
 		//needed these variables for setNext, couldnt leave them as global variables because every instance of "solution" would have changed their value
-		//row = 0;
-		//col = -1;
+		this.row = 0;
+		this.col = -1;
 		
 	}
 
 	public Solution(Solution other) {
 		Solution n = new Solution(other.x.length, other.x[0].length);
-
 		for(int i = 0; i < other.x.length; i++){
-			for(int j = 0; j < x[i].length; j++){
+			for(int j = 0; j < other.x[0].length; j++){
 				n.x[i][j] = other.x[i][j];
 			}
 		}
@@ -36,7 +37,7 @@ public class Solution {
 
 	public void setNext(boolean nextValue) {
 		//Checks if last element in last array is null
-		if(this.x[this.x.length-1][this.x[0].length-1] != null) {
+		/*if(this.x.cCompare == this.x.count) {
 			System.out.println("Too many calls to setNext");
 		}
 		else {	
@@ -51,36 +52,33 @@ public class Solution {
 					}
 				}
 			}
-		}
+		}*/
+
 		//ok im pretty sure thats how the method should be written but i could be wrong
 		//https://piazza.com/class/jpvulq1lvgm6fs?cid=517  -> thing on piazza that had more instructions
 		//also the first call starts at position (0,0) cuz that makes sense since the array starts at (0,0) idk what the instructions even want
-		/*col++;
+	   this.col++;
        
-       if(col >= x[0].length){
-         row++;
-         col = 0;
-       }
-        
-       if(row < x.length && col < x[0].length){
-           x[row][col] = nextValue;
+       if(this.col >= this.x[0].length){
+         	this.row++;
+         	this.col = 0;
+       } 
+       else if(this.row < this.x.length && this.col < this.x[0].length){
+           x[this.row][this.col] = nextValue;
+           this.cCompare++;
        }
        else{
          System.out.println("Too many calls to setNext");
        }
-	*/
+	
 
 	}	
 
 	public boolean isReady() {
-		for(int i = 0; i < this.x.length; i++){
-			for(int j = 0; j < this.x[i].length; j++){
-				if(this.x[i][j] == null){
-					return false;
-				}
-			}
+		if(this.cCompare == this.count) {
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	public boolean isSuccessful() {
@@ -214,12 +212,12 @@ public class Solution {
 	public static void main(String[] args) {
 		Solution solution;
 		solution = new Solution(3,2);
-		solution.setNext(true);
+		solution.setNext(false);
 		solution.setNext(false);
 		solution.setNext(true);
 		System.out.println("Midway - Solution is ready: " + solution.isReady());
-		solution.setNext(false);
 		solution.setNext(true);
+		solution.setNext(false);
 		solution.setNext(false);
 		System.out.println("The solution is:");
 		System.out.println(solution);
