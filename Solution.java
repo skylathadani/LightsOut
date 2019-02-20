@@ -141,6 +141,7 @@ public class Solution {
   		return aString;
 	}
 
+
 	public static void main(String[] args) {
 		Solution solution;
 		solution = new Solution(3,2);
