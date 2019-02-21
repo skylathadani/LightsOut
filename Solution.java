@@ -29,9 +29,9 @@ public class Solution {
 
 	public Solution(Solution other) {
 		x = new Boolean [other.x.length][other.x[0].length];
-		this.row = -1;
-		this.col = 0;
-		this.cCompare = 0;
+		this.row = other.row;
+		this.col = other.col;
+		this.cCompare = other.cCompare;
 		for(int i = 0; i < other.x.length; i++){
 			for(int j = 0; j < other.x[0].length; j++){
 				this.x[i][j] = other.x[i][j];
@@ -130,12 +130,12 @@ public class Solution {
 
 			//this is me testing if the numbers incremented correctly
 
-			for(int i = 0; i < test.length; i++){
+			/*for(int i = 0; i < test.length; i++){
 				for(int j = 0; j < test[0].length; j++){
 					System.out.print(test[i][j] + ",");
 				}
 			}
-			System.out.println("****");
+			System.out.println("****");*/
 
 			//testing if all numbers are odd
 
@@ -310,14 +310,27 @@ public class Solution {
 		solution.setNext(true);
 		solution.setNext(true);
 		solution.setNext(false);
+		Solution s = new Solution(solution);
+
+		System.out.println(s);
 		System.out.println("Midway - Solution is ready: " + solution.isReady());
 		solution.setNext(true);
 		solution.setNext(true);
 		solution.setNext(false);
-		System.out.println("The solution is:");
+
+		s.setNext(false);
+		s.setNext(false);
+		s.setNext(true);
+		System.out.println("The solution1 is:");
 		System.out.println(solution);
-		System.out.println("Solution is ready: " + solution.isReady());
-		System.out.println("Solution is successful: "+solution.isSuccessful());
+		System.out.println("Solution1 is ready: " + solution.isReady());
+		System.out.println("Solution1 is successful: "+solution.isSuccessful());
+
+		System.out.println("The solution2 is:");
+		System.out.println(s);
+		System.out.println("Solution2 is ready: " + s.isReady());
+		System.out.println("Solution2 is successful: "+s.isSuccessful());
+
 
 	}
 }
