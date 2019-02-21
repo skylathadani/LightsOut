@@ -101,6 +101,9 @@ public class Solution {
 			return false;
 		}
 
+		//if you read the assignment, theres a proof that if each block is changed and odd number of times
+		// the solution is always successful, thats what i did below
+
 		if(this.isReady()){
 			int[][] test = new int [this.x.length][this.x[0].length];
 
@@ -125,12 +128,16 @@ public class Solution {
 				}
 			}
 
+			//this is me testing if the numbers incremented correctly
+
 			for(int i = 0; i < test.length; i++){
 				for(int j = 0; j < test[0].length; j++){
 					System.out.print(test[i][j] + ",");
 				}
 			}
 			System.out.println("****");
+
+			//testing if all numbers are odd
 
 			for(int i = 0; i < test.length;i++){
 				for(int j = 0; j < test[0].length; j++){
