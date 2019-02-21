@@ -13,7 +13,11 @@ public class ArrayListSolutionQueue implements SolutionQueue{
 
 	public boolean isEmpty(){
 
-		return queue.isEmpty();
+		if(this.queue.size() != 0){
+			return false;
+		}
+
+		return true;
 
 	}
 
@@ -23,11 +27,11 @@ public class ArrayListSolutionQueue implements SolutionQueue{
 
 	public Solution dequeue(){
 
-		Solution s = this.queue.get(0);
+		Solution x = this.queue.get(0);
 
-		this.queue.remove(s);
+		this.queue.remove(0);
 
-		return s;
+		return x;
 
 	}
 

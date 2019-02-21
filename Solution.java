@@ -18,19 +18,19 @@ public class Solution {
 	private int col;
 
 	public Solution(int width, int height) {
-		x = new Boolean [height][width];
+		x = new Boolean [width][height];
 		this.count = width * height;
 		//needed these variables for setNext, couldnt leave them as global variables because every instance of "solution" would have changed their value
-		this.row = 0;
-		this.col = -1;
+		this.row = -1;
+		this.col = 0;
 		this.cCompare = 0;
 		
 	}
 
 	public Solution(Solution other) {
 		x = new Boolean [other.x.length][other.x[0].length];
-		this.row = 0;
-		this.col = -1;
+		this.row = -1;
+		this.col = 0;
 		this.cCompare = 0;
 		for(int i = 0; i < other.x.length; i++){
 			for(int j = 0; j < other.x[0].length; j++){
@@ -62,11 +62,11 @@ public class Solution {
 		//ok im pretty sure thats how the method should be written but i could be wrong
 		//https://piazza.com/class/jpvulq1lvgm6fs?cid=517  -> thing on piazza that had more instructions
 		//also the first call starts at position (0,0) cuz that makes sense since the array starts at (0,0) idk what the instructions even want
-	   this.col++;
+	   this.row++;
        
-       if(this.col >= this.x[0].length){
-         	this.row++;
-         	this.col = 0;
+       if(this.row >= this.x.length){
+         	this.row = 0;
+         	this.col++;
        } 
        
        if(this.row < this.x.length && this.col < this.x[0].length){
@@ -93,11 +93,76 @@ public class Solution {
 				}
 			}
 		}
-		return false;
+		return true;
 	}
 
 	public boolean isSuccessful() {
 		if(this.isReady() == false){
+			return false;
+		}
+
+		if(this.isReady()){
+			int[][] test = new int [this.x.length][this.x[0].length];
+
+			for(int i = 0; i < this.x.length; i++){
+				for(int j = 0; j < this.x[0].length; j++){
+					
+					if(this.x[i][j] == true){
+						test[i][j] ++;
+						if(i-1 > -1){
+							test[i-1][j]++;
+						}
+						if(j+1 < test[0].length){
+							test[i][j+1]++;
+						}
+						if(i+1 < test.length){
+							test[i+1][j]++;
+						}
+						if(j-1 > -1){
+							test[i][j-1]++;
+						}
+					}
+				}
+			}
+
+			for(int i = 0; i < test.length; i++){
+				for(int j = 0; j < test[0].length; j++){
+					System.out.print(test[i][j] + ",");
+				}
+			}
+			System.out.println("****");
+
+			for(int i = 0; i < test.length;i++){
+				for(int j = 0; j < test[0].length; j++){
+					if(test[i][j]%2 == 0){
+						return false;
+					}
+				}
+			}
+
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		/*if(this.isReady() == false){
 			return false;
 		}
 		if(isReady()) {
@@ -173,7 +238,9 @@ public class Solution {
 			}
 			return true;
 		}
-		return false;
+		return false;*/
+
+		return true;
 	}
 
 	@Override
@@ -204,6 +271,9 @@ public class Solution {
     }
 
 	public String toString() {
+
+
+		
   		String aString = "[";
   		for(int i = 0; i < this.x[0].length; i++) {
   			aString +="[";
@@ -229,13 +299,13 @@ public class Solution {
 
 	public static void main(String[] args) {
 		Solution solution;
-		solution = new Solution(3,2);
-		solution.setNext(false);
-		solution.setNext(false);
+		solution = new Solution(2,2);
 		solution.setNext(true);
+		solution.setNext(true);
+		solution.setNext(false);
 		System.out.println("Midway - Solution is ready: " + solution.isReady());
 		solution.setNext(true);
-		solution.setNext(false);
+		solution.setNext(true);
 		solution.setNext(false);
 		System.out.println("The solution is:");
 		System.out.println(solution);

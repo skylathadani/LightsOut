@@ -1,57 +1,53 @@
 import java.util.*;
 public class LightsOut{
-	public static ArrayList<Solution> solve(int width, int height){
-		final long startTime = System.nanoTime();
-		ArrayListSolutionQueue partialSolutions = new ArrayListSolutionQueue();
+
+	public static ArrayList <Solution> solve(int width,int height){
+
+		ArrayListSolutionQueue queue = new ArrayListSolutionQueue();
+
+		ArrayList<Solution> solutions = new ArrayList<Solution>();
+
 		Solution x = new Solution(width,height);
-		partialSolutions.enqueue(x);
-		ArrayList <Solution> solutions = new ArrayList <Solution> ();
 
-		while(!(partialSolutions.isEmpty())){
-			Solution current = partialSolutions.dequeue();
-			System.out.println(current);
+		queue.enqueue(x);
 
-			if(current.isReady()){
-				if(current.isSuccessful()){
-					solutions.add(current);
-				final long duration = System.nanoTime() - startTime;
 
-				System.out.println("A solution has been found in " + duration);
+		while(!(queue.isEmpty())){
 
-				}
-				
-			}else if (current.isReady() == false){
+			Solution current = queue.dequeue();
 
-				Solution temp = new Solution(current);
+			if(current.isReady() && current.isSuccessful()){
+				solutions.add(current);
+			}else if(current.isReady() == false){
+				//Solution temp = new Solution(current);
 
 				current.setNext(true);
-				temp.setNext(false);
+				//temp.setNext(false);
 
-				partialSolutions.enqueue(current);
-				partialSolutions.enqueue(temp);
-
+				queue.enqueue(current);
+				//queue.enqueue(temp);
 			}
+
 		}
 
 		return solutions;
+
 	}
 
 	public static void main(String[] args) {
 
-		ArrayList<Solution> solver = new ArrayList<Solution>();
+		ArrayList<Solution> s = solve(2,2);
 
-		solver = solve(2,2);
-
-
-
-
-
-		System.out.println("The number of solutions found is " + solver.size());
-
-		System.out.println("The Solutions are:");
-
-		for(int i = 0; i < solver.size(); i++){
-			System.out.println(solver.get(i));
+		for(int i = 0;i<s.size(); i++){
+			System.out.println(s.get(i));
 		}
+		
 	}
+	
+
+	
+
+	
+
+
 }
