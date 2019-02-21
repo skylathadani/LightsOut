@@ -19,9 +19,9 @@ public class LightsOut{
 
 			if(current.isReady() && current.isSuccessful()){
 				long endTime   = System.nanoTime();
-				long totalTime = (endTime - startTime)/1000;
+				long totalTime = (endTime - startTime)/10000000;
 				solutions.add(current);
-				System.out.println("A Solution has been found in " + totalTime + " ns");
+				System.out.println("A Solution has been found in " + totalTime + " ms");
 			}else if(current.isReady() == false){
 				Solution temp = new Solution(current);
 
@@ -40,14 +40,28 @@ public class LightsOut{
 
 	public static void main(String[] args) {
 
-		ArrayList<Solution> s = solve(3,2);
+		int width = 2;
+		int height = 2;
 
-		System.out.println("There are " + s.size() + " solutions found");
+		ArrayList<Solution> s = solve(width,height);
+
+		
 
 		for(int i = 0;i<s.size(); i++){
-			System.out.println("Solution " + (i+1) + ":");
+			if(i == 0){
+				System.out.println("****");
+
+			}
+			
+			//System.out.println("Solution " + (i+1) + ":");
 			System.out.println(s.get(i));
+
+			if(i < s.size()-1){
+				System.out.println("****");
+			}
 		}
+
+		System.out.println("In a board of " + width +"x" + height + ": " + s.size() +" solutions.");
 		
 	}
 	
