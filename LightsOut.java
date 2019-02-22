@@ -40,8 +40,8 @@ public class LightsOut{
 
 	public static void main(String[] args) {
 
-		int width = 2;
-		int height = 2;
+		int width = Integer.parseInt(args[0]);
+		int height = Integer.parseInt(args[1]);
 
 		ArrayList<Solution> s = solve(width,height);
 

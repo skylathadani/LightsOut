@@ -96,6 +96,10 @@ public class Solution {
 		return true;
 	}
 
+	public boolean stillPossible(boolean nextValue) {
+		
+	}
+
 	public boolean isSuccessful() {
 		if(this.isReady() == false){
 			return false;
@@ -148,21 +152,6 @@ public class Solution {
 			}
 
 		}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -279,8 +268,6 @@ public class Solution {
 
 	public String toString() {
 
-
-		
   		String aString = "[";
   		for(int i = 0; i < this.x[0].length; i++) {
   			aString +="[";
