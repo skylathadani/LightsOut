@@ -97,7 +97,70 @@ public class Solution {
 	}
 
 	public boolean stillPossible(boolean nextValue) {
-		
+		//Creates copy of Solution being tested and sets nextValue
+		Solution a = (Solution) this;
+		a.setNext(nextValue);
+
+		//if partial solution is on the 2nd row of the board it starts checking the row above the current one
+		if(a.col >=1 && a.row == this.x[0].length) {
+			int[][] test = new int [a.x.length][1];
+			for(int i = 0; i < a.x.length; i++){
+				for(int j = a.col -1; j < a.col; j++){
+					
+					if(a.x[i][j] == true){
+						if(i-1 > -1){
+							test[i-1][j]++;
+						}
+						if(j+1 < test[0].length){
+							test[i][j+1]++;
+						}
+						if(i+1 < test.length){
+							test[i+1][j]++;
+						}
+						if(j-1 > -1){
+							test[i][j-1]++;
+						}
+					}
+				}
+			}
+			for(int i = 0; i < test.length;i++){
+				for(int j = 0; j < test[0].length; j++){
+					if(test[i][j]%2 == 0){
+						return false;
+					}
+				}
+			}
+			//If board is on the last row it checks the last row
+			if(a.col == a.x.length && a.row == this.x[0].length) {
+				int[][] testTwo = new int [a.x.length][1];
+				for(int i = 0; i < a.x.length; i++){
+					for(int j = a.col; j < a.col+1; j++){
+						if(a.x[i][j] == true){
+							if(i-1 > -1){
+								testTwo[i-1][j]++;
+							}
+							if(j+1 < testTwo[0].length){
+								testTwo[i][j+1]++;
+							}
+							if(i+1 < testTwo.length){
+								testTwo[i+1][j]++;
+							}
+							if(j-1 > -1){
+								testTwo[i][j-1]++;
+							}
+						}
+					}
+				}
+				for(int i = 0; i < testTwo.length;i++){
+					for(int j = 0; j < testTwo[0].length; j++){
+						if(testTwo[i][j]%2 == 0){
+							return false;
+						}
+					}
+				}
+			}
+		}
+		return true;
 	}
 
 	public boolean isSuccessful() {

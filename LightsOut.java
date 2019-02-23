@@ -25,11 +25,15 @@ public class LightsOut{
 			}else if(current.isReady() == false){
 				Solution temp = new Solution(current);
 
-				current.setNext(true);
-				temp.setNext(false);
-
-				queue.enqueue(current);
-				queue.enqueue(temp);
+				//if(current.stillPossible(true) == true) {
+					current.setNext(true);
+					queue.enqueue(current);
+				//}
+				//if(temp.stillPossible(false) == true) {
+					temp.setNext(false);
+					queue.enqueue(temp);
+				//}
+				
 			}
 
 		}
