@@ -112,24 +112,24 @@ public class Solution {
 
 			int[][] test = new int [a.x.length][a.x[0].length];
 
-			for(int i = 0; i < a.x.length; i++){
-				for(int j = 0; j < a.x[0].length; j++){
+			for(int i = 0; i < a.x[0].length; i++){
+				for(int j = 0; j < a.x.length; j++){
 
 					//System.out.println(i+","+j);
 					
-					if(a.x[i][j] != null && a.x[i][j] != false){
-						test[i][j] ++;
-						if(i-1 > -1){
-							test[i-1][j]++;
-						}
-						if(j+1 < test[0].length){
-							test[i][j+1]++;
-						}
-						if(i+1 < test.length){
-							test[i+1][j]++;
-						}
+					if(a.x[j][i] != null && a.x[j][i] != false){
+						test[j][i] ++;
 						if(j-1 > -1){
-							test[i][j-1]++;
+							test[j-1][i]++;
+						}
+						if(i+1 < test[0].length){
+							test[j][i+1]++;
+						}
+						if(j+1 < test.length){
+							test[j+1][i]++;
+						}
+						if(i-1 > -1){
+							test[j][i-1]++;
 						}
 					}
 				}
@@ -145,24 +145,24 @@ public class Solution {
 
 			int[][] test = new int [a.x.length][a.x[0].length];
 
-			for(int i = 0; i < a.x.length; i++){
-				for(int j = 0; j < a.x[0].length; j++){
+			for(int i = 0; i < a.x[0].length; i++){
+				for(int j = 0; j < a.x.length; j++){
 
 					//System.out.println(i+","+j);
 					
-					if(a.x[i][j] != null && a.x[i][j] != false){
-						test[i][j] ++;
-						if(i-1 > -1){
-							test[i-1][j]++;
-						}
-						if(j+1 < test[0].length){
-							test[i][j+1]++;
-						}
-						if(i+1 < test.length){
-							test[i+1][j]++;
-						}
+					if(a.x[j][i] != null && a.x[j][i] != false){
+						test[j][i] ++;
 						if(j-1 > -1){
-							test[i][j-1]++;
+							test[j-1][i]++;
+						}
+						if(i+1 < test[0].length){
+							test[j][i+1]++;
+						}
+						if(j+1 < test.length){
+							test[j+1][i]++;
+						}
+						if(i-1 > -1){
+							test[j][i-1]++;
 						}
 					}
 				}
