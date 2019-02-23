@@ -16,6 +16,7 @@ public class LightsOut{
 		while(!(queue.isEmpty())){
 
 			Solution current = queue.dequeue();
+			//System.out.println(current);
 
 			if(current.isReady() && current.isSuccessful()){
 				long endTime   = System.nanoTime();
@@ -23,7 +24,7 @@ public class LightsOut{
 				solutions.add(current);
 				System.out.println("A Solution has been found in " + totalTime + " ms");
 			}else if(current.isReady() == false){
-				if(current.stillPossible(true)||current.stillPossible(false)){
+				if(current.stillPossible(true) || current.stillPossible(false)){
 					Solution temp = new Solution(current);
 
 				//if(current.stillPossible(true) == true) {
@@ -34,6 +35,7 @@ public class LightsOut{
 					temp.setNext(false);
 					queue.enqueue(temp);
 				//}
+
 				}
 				
 				
@@ -47,8 +49,11 @@ public class LightsOut{
 
 	public static void main(String[] args) {
 
-		int width = Integer.parseInt(args[0]);
-		int height = Integer.parseInt(args[1]);
+		int width = 7;
+		int height = 7;
+
+		//int width = Integer.parseInt(args[0]);
+		//int height = Integer.parseInt(args[1]);
 
 		ArrayList<Solution> s = solve(width,height);
 

@@ -97,17 +97,28 @@ public class Solution {
 	}
 
 	public boolean stillPossible(boolean nextValue) {
-		//Creates copy of Solution being tested and sets nextValue
-		Solution a = (Solution) this;
+
+				//Creates copy of Solution being tested and sets nextValue
+		Solution a = new Solution(this);
 		a.setNext(nextValue);
 
-		//if partial solution is on the 2nd row of the board it starts checking the row above the current one
-		if(a.col >=1 && a.row == this.x[0].length) {
-			int[][] test = new int [a.x.length][1];
+		//System.out.println("This is a:");
+		//System.out.println(a);
+		//System.out.println("#########");
+
+		//checks the [0][0] position
+
+		if(a.col == 1 && a.row == 1){
+
+			int[][] test = new int [a.x.length][a.x[0].length];
+
 			for(int i = 0; i < a.x.length; i++){
-				for(int j = a.col -1; j < a.col; j++){
+				for(int j = 0; j < a.x[0].length; j++){
+
+					//System.out.println(i+","+j);
 					
-					if(a.x[i][j] == true){
+					if(a.x[i][j] != null && a.x[i][j] != false){
+						test[i][j] ++;
 						if(i-1 > -1){
 							test[i-1][j]++;
 						}
@@ -123,44 +134,52 @@ public class Solution {
 					}
 				}
 			}
-			for(int i = 0; i < test.length;i++){
-				for(int j = 0; j < test[0].length; j++){
-					if(test[i][j]%2 == 0){
-						return false;
-					}
-				}
+
+			if(test[0][0] %2 == 0){
+				return false;
 			}
-			//If board is on the last row it checks the last row
-			if(a.col == a.x.length && a.row == this.x[0].length) {
-				int[][] testTwo = new int [a.x.length][1];
-				for(int i = 0; i < a.x.length; i++){
-					for(int j = a.col; j < a.col+1; j++){
-						if(a.x[i][j] == true){
-							if(i-1 > -1){
-								testTwo[i-1][j]++;
-							}
-							if(j+1 < testTwo[0].length){
-								testTwo[i][j+1]++;
-							}
-							if(i+1 < testTwo.length){
-								testTwo[i+1][j]++;
-							}
-							if(j-1 > -1){
-								testTwo[i][j-1]++;
-							}
-						}
-					}
-				}
-				for(int i = 0; i < testTwo.length;i++){
-					for(int j = 0; j < testTwo[0].length; j++){
-						if(testTwo[i][j]%2 == 0){
-							return false;
-						}
-					}
-				}
-			}
+
 		}
+// Checks the row above
+		if(a.col >=1  && a.col < a.x[0].length && a.row == a.x.length-1){
+
+			int[][] test = new int [a.x.length][a.x[0].length];
+
+			for(int i = 0; i < a.x.length; i++){
+				for(int j = 0; j < a.x[0].length; j++){
+
+					//System.out.println(i+","+j);
+					
+					if(a.x[i][j] != null && a.x[i][j] != false){
+						test[i][j] ++;
+						if(i-1 > -1){
+							test[i-1][j]++;
+						}
+						if(j+1 < test[0].length){
+							test[i][j+1]++;
+						}
+						if(i+1 < test.length){
+							test[i+1][j]++;
+						}
+						if(j-1 > -1){
+							test[i][j-1]++;
+						}
+					}
+				}
+			}
+
+			for(int i = 0; i < a.x.length; i++){
+
+				if(test[i][a.col-1] % 2 ==0 ){
+					return false;
+				}
+
+			}
+
+		}
+
 		return true;
+
 	}
 
 	public boolean isSuccessful() {
@@ -195,16 +214,7 @@ public class Solution {
 				}
 			}
 
-			//this is me testing if the numbers incremented correctly
-
-			/*for(int i = 0; i < test.length; i++){
-				for(int j = 0; j < test[0].length; j++){
-					System.out.print(test[i][j] + ",");
-				}
-			}
-			System.out.println("****");*/
-
-			//testing if all numbers are odd
+			
 
 			for(int i = 0; i < test.length;i++){
 				for(int j = 0; j < test[0].length; j++){
@@ -215,89 +225,6 @@ public class Solution {
 			}
 
 		}
-
-
-
-
-
-
-		/*if(this.isReady() == false){
-			return false;
-		}
-		if(isReady()) {
-			Solution g = new Solution(this.x.length, this.x[0].length);
-			for(int k=0; k < x.length; k++) {
-				for(int j=0; j< x[0].length; j++) {
-					g.x[k][j] = false;
-				}
-			}
-			for(int i=0; i < x.length; i++) {
-				for(int j=0; j < x[0].length; j++) {
-					if(this.x[i][j] == true) {
-						if(i == 0 && j == 0) {
-							g.x[i][j] = !(g.x[i][j]);
-							g.x[i+1][j] = !(g.x[i+1][j]);
-							g.x[i][j+1] = !(g.x[i][j+1]);
-						}
-						else if(i == 0 && j == x[0].length-1) {
-							g.x[i][j] = !(g.x[i][j]);
-							g.x[i+1][j] = !(g.x[i+1][j]);
-							g.x[i][j-1] = !(g.x[i][j-1]);
-						}
-						else if(i == this.x.length-1 && j == 0) {
-							g.x[i][j] = !(g.x[i][j]);
-							g.x[i-1][j] = !(g.x[i-1][j]);
-							g.x[i][j+1] = !(g.x[i][j+1]);
-						}
-						else if(i == this.x.length-1 && j == this.x[0].length-1) {
-							g.x[i][j] = !(g.x[i][j]);
-							g.x[i-1][j] = !(g.x[i-1][j]);
-							g.x[i][j-1] = !(g.x[i][j-1]);
-						}
-						else if(j == 0) {
-							g.x[i][j] = !(g.x[i][j]);
-							g.x[i+1][j] = !(g.x[i+1][j]);
-							g.x[i][j+1] = !(g.x[i][j+1]);
-							g.x[i-1][j] = !(g.x[i-1][j]);
-						}
-						else if(j == this.x[0].length -1) {
-							g.x[i][j] = !(g.x[i][j]);
-							g.x[i+1][j] = !(g.x[i+1][j]);
-							g.x[i][j-1] = !(g.x[i][j-1]);
-							g.x[i-1][j] = !(g.x[i-1][j]);
-						}
-						else if(i == 0) {
-							g.x[i][j] = !(g.x[i][j]);
-							g.x[i+1][j] = !(g.x[i+1][j]);
-							g.x[i][j+1] = !(g.x[i][j+1]);
-							g.x[i][j-1] = !(g.x[i][j-1]);
-						}
-						else if(i == this.x.length -1) {
-							g.x[i][j] = !(g.x[i][j]);
-							g.x[i-1][j] = !(g.x[i-1][j]);
-							g.x[i][j+1] = !(g.x[i][j+1]);
-							g.x[i-1][j] = !(g.x[i-1][j]);
-						}
-						else {
-							g.x[i][j] = !(g.x[i][j]);
-							g.x[i+1][j] = !(g.x[i+1][j]);
-							g.x[i][j+1] = !(g.x[i][j+1]);
-							g.x[i-1][j] = !(g.x[i-1][j]);
-							g.x[i][j-1] = !(g.x[i][j-1]);
-						}
-					}
-				}
-			}
-			for(int i = 0; i < this.x.length; i++) {
-				for(int j=0; j < this.x[0].length; j++) {
-					if(g.x[i][j] == false) {
-						return false;
-					}
-				}
-			}
-			return true;
-		}
-		return false;*/
 
 		return true;
 	}
@@ -356,31 +283,12 @@ public class Solution {
 
 	public static void main(String[] args) {
 		Solution solution;
-		solution = new Solution(2,2);
-		solution.setNext(true);
-		solution.setNext(true);
-		solution.setNext(false);
-		Solution s = new Solution(solution);
-
-		System.out.println(s);
-		System.out.println("Midway - Solution is ready: " + solution.isReady());
+		solution = new Solution(3,2);
 		solution.setNext(true);
 		solution.setNext(true);
 		solution.setNext(false);
 
-		s.setNext(false);
-		s.setNext(false);
-		s.setNext(true);
-		System.out.println("The solution1 is:");
-		System.out.println(solution);
-		System.out.println("Solution1 is ready: " + solution.isReady());
-		System.out.println("Solution1 is successful: "+solution.isSuccessful());
-
-		System.out.println("The solution2 is:");
-		System.out.println(s);
-		System.out.println("Solution2 is ready: " + s.isReady());
-		System.out.println("Solution2 is successful: "+s.isSuccessful());
-
+		System.out.println(solution.stillPossible(true));
 
 	}
 }
