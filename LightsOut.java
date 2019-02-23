@@ -23,7 +23,8 @@ public class LightsOut{
 				solutions.add(current);
 				System.out.println("A Solution has been found in " + totalTime + " ms");
 			}else if(current.isReady() == false){
-				Solution temp = new Solution(current);
+				if(current.stillPossible(true)||current.stillPossible(false)){
+					Solution temp = new Solution(current);
 
 				//if(current.stillPossible(true) == true) {
 					current.setNext(true);
@@ -33,6 +34,8 @@ public class LightsOut{
 					temp.setNext(false);
 					queue.enqueue(temp);
 				//}
+				}
+				
 				
 			}
 
