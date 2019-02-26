@@ -49,8 +49,8 @@ public class LightsOut{
 
 	public static void main(String[] args) {
 
-		int width = 7;
-		int height = 7;
+		int width = 5;
+		int height = 5;
 
 		//int width = Integer.parseInt(args[0]);
 		//int height = Integer.parseInt(args[1]);
